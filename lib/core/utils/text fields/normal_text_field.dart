@@ -8,5 +8,7 @@ class NormalTextField extends CustomTextField {
     super.hintText,
     super.label,
     super.labelText,
+    super.textInputAction,
+    super.textInputType,
   });
 }

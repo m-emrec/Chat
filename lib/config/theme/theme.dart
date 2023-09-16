@@ -36,4 +36,5 @@ class AppColors {
   static const Color cardColor = Color(0xFFFBF3EF);
   static const Color scaffold = Color(0xFFFEFEFA);
   static const Color button = Color(0xFF153243);
+  static const Color buttonText = Color(0xFFEFF6FA);
 }

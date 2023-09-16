@@ -1,21 +1,25 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first, overridden_fields
-import 'package:chat_app/core/extensions/empty_padding.dart';
 import 'package:flutter/material.dart';
 
 import 'package:chat_app/config/theme/theme.dart';
+import 'package:chat_app/core/extensions/empty_padding.dart';
 
 abstract class CustomTextField extends TextFormField {
   // final FormFieldValidator<String>? validator;
   final String? hintText;
   final Widget? label;
   final String? labelText;
+  final TextInputType? textInputType;
+  final TextInputAction? textInputAction;
   CustomTextField({
     super.key,
-    super.controller,
-    super.validator,
     this.hintText,
     this.label,
     this.labelText,
+    this.textInputType,
+    this.textInputAction,
+    super.controller,
+    super.validator,
   });
 
   @override
@@ -63,6 +67,8 @@ abstract class CustomTextField extends TextFormField {
                 floatingLabelBehavior: FloatingLabelBehavior.always,
                 floatingLabelAlignment: FloatingLabelAlignment.start,
               ),
+              keyboardType: textInputType,
+              textInputAction: textInputAction,
             ),
           ],
         );

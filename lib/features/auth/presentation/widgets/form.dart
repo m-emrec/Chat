@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:chat_app/core/extensions/context_extension.dart';
 import 'package:flutter/material.dart';
 
 class AuthForm extends StatefulWidget {
@@ -19,10 +20,13 @@ class _AuthFormState extends State<AuthForm> {
   Widget build(BuildContext context) {
     return Form(
       key: widget.formKey,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: widget.children ?? [],
+      child: SizedBox(
+        width: context.screenSize.width * 0.9,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: widget.children ?? [],
+        ),
       ),
     );
   }
