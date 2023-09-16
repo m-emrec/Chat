@@ -5,6 +5,7 @@ import 'package:flutter/src/widgets/form.dart';
 
 import '../../../config/theme/theme.dart';
 
+// ignore: must_be_immutable
 class PasswordField extends CustomTextField {
   PasswordField({
     super.key,

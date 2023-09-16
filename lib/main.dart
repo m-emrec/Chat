@@ -4,6 +4,8 @@ import 'package:chat_app/features/auth/presentation/pages/sign_in_page.dart';
 import 'package:chat_app/features/home/presentation/pages/home_page.dart';
 import 'package:flutter/material.dart';
 
+import 'features/auth/presentation/pages/sign_up_page.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -19,7 +21,7 @@ class MyApp extends StatelessWidget {
       theme: AppTheme.lightTheme,
       // themeMode: ,
       darkTheme: AppTheme.darkTheme,
-      initialRoute: SignInPage.routeName,
+      initialRoute: SignUpPage.routeName,
       routes: appRoutes,
     );
   }
