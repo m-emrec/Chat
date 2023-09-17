@@ -1,20 +1,23 @@
 import 'package:chat_app/core/resources/data_state.dart';
+import 'package:chat_app/features/auth/domain/entities/user_entity.dart';
 
 abstract class UserRepo {
   ///
   Future<DataState> signIn({
-    String email,
-    String password,
+    required String email,
+    required String password,
   });
 
   Future<DataState> signUp({
-    String email,
-    String password,
+    required String email,
+    required String password,
   });
 
   Future<DataState> forgetPassword({
-    String email,
+    required String email,
   });
 
   Future<DataState> signInwithGoogle();
+
+  Future<DataState<UserEntity>> fetchUserData({required String uid});
 }

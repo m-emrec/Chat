@@ -11,9 +11,13 @@ class AuthInitial extends AuthState {}
 
 class AuthLoading extends AuthState {}
 
-class AuthLoadedSuccess extends AuthState {}
+class AuthSuccess extends AuthState {}
 
-class AuthLoadedFail extends AuthState {}
+class AuthFail extends AuthState {
+  final String exception;
+
+  const AuthFail(this.exception);
+}
 
 /// Action States
 abstract class AuthAcitonState extends AuthState {}

@@ -1,3 +1,4 @@
+// ignore: file_names
 import 'package:chat_app/core/resources/data_state.dart';
 import 'package:chat_app/core/usecase/use_case.dart';
 import 'package:chat_app/features/auth/domain/repositories/user_repo.dart';

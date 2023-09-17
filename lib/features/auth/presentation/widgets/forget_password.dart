@@ -38,16 +38,16 @@ class _ForgetPasswordState extends State<ForgetPassword>
       padding: EdgeInsets.only(bottom: bottomInset),
       child: BackdropFilter(
         filter: ImageFilter.blur(
-          sigmaX: 10,
-          sigmaY: 10,
+          sigmaX: 4,
+          sigmaY: 4,
         ),
         child: Container(
           decoration: BoxDecoration(
             /// Gradient
             gradient: LinearGradient(
               colors: [
-                AppColors.cardColor,
-                AppColors.cardColor.withOpacity(0.3),
+                AppColors.cardColor.withOpacity(0.8),
+                AppColors.cardColor.withOpacity(0.2),
               ],
               begin: Alignment.bottomCenter,
               end: Alignment.topCenter,
