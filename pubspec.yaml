@@ -43,6 +43,7 @@ dependencies:
   equatable: ^2.0.5
   logger: ^2.0.2
   email_validator: ^2.1.17
+  get_it: ^7.6.4
 
 dev_dependencies:
   flutter_test:
