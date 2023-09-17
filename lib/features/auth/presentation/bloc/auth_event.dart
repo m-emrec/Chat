@@ -27,6 +27,10 @@ class AuthSignUpEvent extends AuthEvent {
   });
 }
 
-class AuthForgetPasswordEvent extends AuthEvent {}
+class AuthForgetPasswordEvent extends AuthEvent {
+  final String email;
+
+  const AuthForgetPasswordEvent(this.email);
+}
 
 class AuthSignInWithGoogleEvent extends AuthEvent {}

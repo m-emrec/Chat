@@ -4,10 +4,13 @@ import 'package:chat_app/config/theme/theme.dart';
 import 'package:chat_app/core/extensions/context_extension.dart';
 import 'package:chat_app/core/utils/Buttons/responsive_button.dart';
 import 'package:chat_app/core/utils/text%20fields/normal_text_field.dart';
+import 'package:chat_app/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:chat_app/logger.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../injection_container.dart';
 
 class ForgetPassword extends StatefulWidget {
   const ForgetPassword({super.key});
@@ -112,7 +115,12 @@ class _ForgetPasswordState extends State<ForgetPassword>
               /// Button
               ResponsiveButton(
                 screenSize: context.screenSize,
-                onPressed: () {},
+                onPressed: () {
+                  sl<AuthBloc>().add(
+                    AuthForgetPasswordEvent(_emailController.text),
+                  );
+                  Navigator.of(context).pop();
+                },
                 child: const Text("Send"),
               ),
             ],

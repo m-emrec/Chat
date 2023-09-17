@@ -2,6 +2,7 @@
 
 import 'package:chat_app/core/resources/data_state.dart';
 import 'package:chat_app/features/auth/data/models/user_model.dart';
+import 'package:chat_app/logger.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class FirestoreConnection {
@@ -26,8 +27,10 @@ class FirestoreConnection {
         "uid": _user.uid,
         "email": _user.email,
       });
+      logger.i("Collection is done");
       return DataSuccess(null);
     } catch (e) {
+      logger.e(e.toString());
       return DataFailed(e);
     }
   }

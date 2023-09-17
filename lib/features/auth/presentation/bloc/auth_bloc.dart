@@ -10,6 +10,7 @@ import 'package:chat_app/features/auth/domain/usecases/sign_up_use_case.dart';
 import 'package:chat_app/features/auth/presentation/pages/sign_up_page.dart';
 import 'package:chat_app/logger.dart';
 import 'package:equatable/equatable.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import '../../../../core/resources/data_state.dart';
 
@@ -40,10 +41,14 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       final DataState dataState =
           await _signInUseCase.call([event.email, event.password]);
       if (dataState is DataSuccess) {
-        // emit()
+        logger.i("Success");
+        emit(AuthSuccess());
       } else {
         emit(AuthFail(dataState.exception ?? "An unkown error occured ! "));
       }
+    } on FirebaseAuthException catch (e) {
+      logger.e(e.message);
+      emit(AuthFail(e.message ?? "An error occured !"));
     } catch (e) {
       emit(AuthFail(e.toString()));
     }
@@ -58,19 +63,45 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
       if (dataState is DataSuccess) {
         emit(AuthSuccess());
+        logger.i("Success");
       } else {
-        logger.e(dataState.exception);
-        emit(AuthFail(dataState.exception ?? "An unkown error occured !"));
+        logger.e(dataState.exception.toString());
+        emit(AuthFail(
+            dataState.exception.toString() ?? "An unkown error occured !"));
       }
+    } on FirebaseAuthException catch (e) {
+      logger.e(e.message);
     } catch (e) {
-      logger.e(e);
+      logger.e(e.toString());
       emit(AuthFail(e.toString()));
     }
   }
 
   FutureOr<void> onAuthSignInWithGoogleEvent(
-      AuthSignInWithGoogleEvent event, Emitter<AuthState> emit) {}
+      AuthSignInWithGoogleEvent event, Emitter<AuthState> emit) async {
+    emit(AuthLoading());
+    try {
+      await _googleSignInUseCase.call(null);
+      emit(AuthSuccess());
+    } catch (e) {
+      logger.e(e.toString());
+      emit(AuthFail(e.toString()));
+    }
+  }
 
   FutureOr<void> onAuthForgetPasswordEvent(
-      AuthForgetPasswordEvent event, Emitter<AuthState> emit) {}
+      AuthForgetPasswordEvent event, Emitter<AuthState> emit) async {
+    try {
+      final dataState = await _forgetPasswordUseCase.call(event.email);
+      if (dataState is DataSuccess) {
+        emit(AuthSuccess());
+      } else {
+        emit(AuthFail(dataState.exception ?? "Zn error occured !"));
+      }
+    } on FirebaseAuthException catch (e) {
+      emit(AuthFail(e.message ?? "An error occured"));
+    } catch (e) {
+      emit(AuthFail(e.toString()));
+    }
+  }
 }

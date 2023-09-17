@@ -5,9 +5,11 @@ import 'package:chat_app/core/utils/Buttons/responsive_button.dart';
 import 'package:chat_app/core/utils/Buttons/text_button.dart';
 import 'package:chat_app/core/utils/text%20fields/normal_text_field.dart';
 import 'package:chat_app/core/utils/text%20fields/password_field.dart';
+import 'package:chat_app/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:chat_app/features/auth/presentation/pages/sign_in_page.dart';
 import 'package:chat_app/features/auth/presentation/widgets/app_bar.dart';
 import 'package:chat_app/features/auth/presentation/widgets/form.dart';
+import 'package:chat_app/injection_container.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 
@@ -87,7 +89,11 @@ class _SignUpPageState extends State<SignUpPage> {
                 screenSize: size,
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    logger.i("message");
+                    sl<AuthBloc>().add(
+                      AuthSignUpEvent(
+                          email: _nameController.text,
+                          password: _passwordController.text),
+                    );
                   }
                 },
                 child: const Text("Sign Up"),
