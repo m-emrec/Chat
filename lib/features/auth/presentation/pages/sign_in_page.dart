@@ -16,6 +16,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../config/theme/theme.dart';
+import '../../../../core/utils/snackbars/error_snack.dart';
 import '../../../../logger.dart';
 
 class SignInPage extends StatefulWidget {
@@ -53,6 +54,14 @@ class _SignInPageState extends State<SignInPage> {
             listener: (context, state) {
               if (state is AuthSuccess) {
                 Navigator.of(context).pushReplacementNamed("/");
+              }
+              if (state is AuthFail) {
+                logger.e(state.exception);
+                ScaffoldMessenger.of(context).showSnackBar(
+                  ErrorSnack(
+                    error: state.exception,
+                  ),
+                );
               }
             },
             listenWhen: (previous, current) => current is AuthActionState,

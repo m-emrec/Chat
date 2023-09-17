@@ -3,6 +3,7 @@ import 'package:chat_app/core/extensions/empty_padding.dart';
 import 'package:chat_app/core/extensions/image_extension.dart';
 import 'package:chat_app/core/utils/Buttons/responsive_button.dart';
 import 'package:chat_app/core/utils/Buttons/text_button.dart';
+import 'package:chat_app/core/utils/snackbars/error_snack.dart';
 import 'package:chat_app/core/utils/text%20fields/normal_text_field.dart';
 import 'package:chat_app/core/utils/text%20fields/password_field.dart';
 import 'package:chat_app/features/auth/presentation/bloc/auth_bloc.dart';
@@ -66,6 +67,11 @@ class _SignUpPageState extends State<SignUpPage> {
           }
           if (state is AuthFail) {
             logger.e(state.exception);
+            ScaffoldMessenger.of(context).showSnackBar(
+              ErrorSnack(
+                error: state.exception,
+              ),
+            );
           }
         },
         builder: (context, state) {
