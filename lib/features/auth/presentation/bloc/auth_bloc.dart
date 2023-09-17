@@ -63,7 +63,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
       if (dataState is DataSuccess) {
         emit(AuthSuccess());
-        logger.i("Success");
       } else {
         logger.e(dataState.exception.toString());
         emit(AuthFail(

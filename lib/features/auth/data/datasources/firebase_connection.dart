@@ -27,7 +27,6 @@ class FirestoreConnection {
         "uid": _user.uid,
         "email": _user.email,
       });
-      logger.i("Collection is done");
       return DataSuccess(null);
     } catch (e) {
       logger.e(e.toString());

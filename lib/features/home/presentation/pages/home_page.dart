@@ -1,6 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
+  static const String routeName = "/home";
   const HomePage({super.key});
 
   @override
@@ -12,7 +15,9 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Text("Home"),
+        child: ElevatedButton(
+            onPressed: () => FirebaseAuth.instance.signOut(),
+            child: Text("Fuck Off")),
       ),
     );
   }
