@@ -1,10 +1,24 @@
 import 'package:flutter/material.dart';
 
 abstract class CustomSnack extends SnackBar {
+  final String? text;
   const CustomSnack({
     super.key,
     super.content = const SizedBox(),
+    this.text,
   });
+
+  TextStyle get style => const TextStyle(
+        fontWeight: FontWeight.w600,
+        shadows: [
+          Shadow(
+            offset: Offset(0, 1),
+            blurRadius: 8,
+            color: Colors.white70,
+          ),
+        ],
+      );
+
   @override
   SnackBarBehavior? get behavior => SnackBarBehavior.floating;
 

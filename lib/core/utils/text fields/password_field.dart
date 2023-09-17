@@ -14,6 +14,7 @@ class PasswordField extends CustomTextField {
     super.label,
     super.labelText,
     super.validator,
+    super.textInputAction,
   });
   bool _hidePassword = true;
 

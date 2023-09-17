@@ -4,6 +4,7 @@ import 'package:chat_app/core/extensions/image_extension.dart';
 import 'package:chat_app/core/utils/Buttons/responsive_button.dart';
 import 'package:chat_app/core/utils/Buttons/text_button.dart';
 import 'package:chat_app/core/utils/snackbars/error_snack.dart';
+import 'package:chat_app/core/utils/snackbars/success_snack.dart';
 import 'package:chat_app/core/utils/text%20fields/normal_text_field.dart';
 import 'package:chat_app/core/utils/text%20fields/password_field.dart';
 import 'package:chat_app/features/auth/presentation/bloc/auth_bloc.dart';
@@ -16,6 +17,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../config/theme/theme.dart';
+import '../../../../core/constants/error_messages.dart';
 import '../../../../logger.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -63,13 +65,19 @@ class _SignUpPageState extends State<SignUpPage> {
         bloc: _authBloc,
         listener: (context, state) {
           if (state is AuthSuccess) {
-            Navigator.of(context).pushReplacementNamed("/");
+            Navigator.of(context)
+                .pushReplacementNamed("/")
+                .then((value) => ScaffoldMessenger.of(context).showSnackBar(
+                      SuccessSnack(
+                        text: "Well",
+                      ),
+                    ));
           }
           if (state is AuthFail) {
             logger.e(state.exception);
             ScaffoldMessenger.of(context).showSnackBar(
               ErrorSnack(
-                error: state.exception,
+                text: state.exception,
               ),
             );
           }

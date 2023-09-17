@@ -1,8 +1,10 @@
+import 'package:chat_app/core/constants/error_messages.dart';
 import 'package:chat_app/core/extensions/context_extension.dart';
 import 'package:chat_app/core/extensions/empty_padding.dart';
 import 'package:chat_app/core/extensions/image_extension.dart';
 import 'package:chat_app/core/utils/Buttons/responsive_button.dart';
 import 'package:chat_app/core/utils/Buttons/text_button.dart';
+import 'package:chat_app/core/utils/snackbars/success_snack.dart';
 import 'package:chat_app/core/utils/text%20fields/normal_text_field.dart';
 import 'package:chat_app/core/utils/text%20fields/password_field.dart';
 import 'package:chat_app/features/auth/presentation/bloc/auth_bloc.dart';
@@ -59,7 +61,7 @@ class _SignInPageState extends State<SignInPage> {
                 logger.e(state.exception);
                 ScaffoldMessenger.of(context).showSnackBar(
                   ErrorSnack(
-                    error: state.exception,
+                    text: state.exception,
                   ),
                 );
               }
@@ -75,7 +77,7 @@ class _SignInPageState extends State<SignInPage> {
                     controller: _nameController,
                     hintText: "example@xxx.com",
                     textInputType: TextInputType.emailAddress,
-                    validator: emailValidator,
+                    textInputAction: TextInputAction.next,
                   ),
 
                   /// Spacing
@@ -114,6 +116,7 @@ class _SignInPageState extends State<SignInPage> {
                       ],
                     ),
                     controller: _passwordController,
+                    textInputAction: TextInputAction.done,
                   ),
 
                   /// Spacing

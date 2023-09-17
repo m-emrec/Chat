@@ -82,7 +82,7 @@ class UserRepoImpl implements UserRepo {
       );
     } on FirebaseAuthException catch (e) {
       logger.e(e.message);
-      return DataFailed(e.message);
+      return DataFailed(e.code);
     } catch (e) {
       logger.e(e.toString());
       return DataFailed(e.toString());

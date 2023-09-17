@@ -41,14 +41,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       final DataState dataState =
           await _signInUseCase.call([event.email, event.password]);
       if (dataState is DataSuccess) {
-        logger.i("Success");
         emit(AuthSuccess());
       } else {
         emit(AuthFail(dataState.exception ?? "An unkown error occured ! "));
       }
     } on FirebaseAuthException catch (e) {
-      logger.e(e.message);
-      emit(AuthFail(e.message ?? "An error occured !"));
+      logger.e(e);
+      emit(AuthFail(e.code ?? "An error occured !"));
     } catch (e) {
       emit(AuthFail(e.toString()));
     }
@@ -70,6 +69,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       }
     } on FirebaseAuthException catch (e) {
       logger.e(e.message);
+      emit(AuthFail(e.code));
     } catch (e) {
       logger.e(e.toString());
       emit(AuthFail(e.toString()));
