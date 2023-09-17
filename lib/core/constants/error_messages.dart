@@ -5,7 +5,7 @@ class ErrorMessages {
     "invalid-credential": "",
     "operation-not-allowed": "",
     "user-not-found": "",
-    "wrong-password": "",
+    "wrong-password": "Wrong Password",
     "invalid-verification-code": "",
     "invalid-verification-id": "",
     "email-already-in-use":

@@ -78,6 +78,7 @@ class _SignInPageState extends State<SignInPage> {
                     hintText: "example@xxx.com",
                     textInputType: TextInputType.emailAddress,
                     textInputAction: TextInputAction.next,
+                    validator: (value) => value!.isEmpty ? "" : null,
                   ),
 
                   /// Spacing

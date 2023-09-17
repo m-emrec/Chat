@@ -65,13 +65,7 @@ class _SignUpPageState extends State<SignUpPage> {
         bloc: _authBloc,
         listener: (context, state) {
           if (state is AuthSuccess) {
-            Navigator.of(context)
-                .pushReplacementNamed("/")
-                .then((value) => ScaffoldMessenger.of(context).showSnackBar(
-                      SuccessSnack(
-                        text: "Well",
-                      ),
-                    ));
+            Navigator.of(context).pushReplacementNamed("/");
           }
           if (state is AuthFail) {
             logger.e(state.exception);
