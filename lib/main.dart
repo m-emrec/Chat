@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
       theme: AppTheme.lightTheme,
       // themeMode: ,
       darkTheme: AppTheme.darkTheme,
-      initialRoute: SignUpPage.routeName,
+      initialRoute: SignInPage.routeName,
       routes: appRoutes,
     );
   }

@@ -19,7 +19,7 @@ class ButtonText extends StatefulWidget {
 class _ButtonTextState extends State<ButtonText> {
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
       onTap: widget.onTap,
       child: Text(
         widget.text,

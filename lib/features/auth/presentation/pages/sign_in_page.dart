@@ -5,8 +5,11 @@ import 'package:chat_app/core/utils/Buttons/responsive_button.dart';
 import 'package:chat_app/core/utils/Buttons/text_button.dart';
 import 'package:chat_app/core/utils/text%20fields/normal_text_field.dart';
 import 'package:chat_app/core/utils/text%20fields/password_field.dart';
+import 'package:chat_app/features/auth/presentation/pages/sign_up_page.dart';
 import 'package:chat_app/features/auth/presentation/widgets/app_bar.dart';
+import 'package:chat_app/features/auth/presentation/widgets/forget_password.dart';
 import 'package:chat_app/features/auth/presentation/widgets/form.dart';
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../config/theme/theme.dart';
@@ -37,14 +40,19 @@ class _SignInPageState extends State<SignInPage> {
           child: AuthForm(
             formKey: _formKey,
             children: [
+              /// Email field
               NormalTextField(
                 labelText: "Email",
                 controller: _nameController,
                 hintText: "example@xxx.com",
-                validator: (value) => value!.isEmpty ? "fuck" : null,
                 textInputType: TextInputType.emailAddress,
+                validator: emailValidator,
               ),
+
+              /// Spacing
               32.ph,
+
+              /// Password Field
               PasswordField(
                 label: Row(
                   crossAxisAlignment: CrossAxisAlignment.end,
@@ -57,6 +65,8 @@ class _SignInPageState extends State<SignInPage> {
                         color: AppColors.button,
                       ),
                     ),
+
+                    /// Forget button
                     GestureDetector(
                       child: const Text(
                         "Forget ?",
@@ -66,23 +76,33 @@ class _SignInPageState extends State<SignInPage> {
                           fontSize: 12,
                         ),
                       ),
-                      onTap: () {},
+                      onTap: () => showModalBottomSheet(
+                        backgroundColor: Colors.transparent,
+                        context: context,
+                        builder: (_) => const ForgetPassword(),
+                      ),
                     ),
                   ],
                 ),
                 controller: _passwordController,
               ),
+
+              /// Spacing
               32.ph,
+
+              /// Sign In Button
               ResponsiveButton(
                 screenSize: size,
                 onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    logger.i("message");
-                  }
+                  if (_formKey.currentState!.validate()) {}
                 },
                 child: const Text("Sign In"),
               ),
+
+              /// Spacing
               32.ph,
+
+              /// Sign in with google
               OutlinedButton(
                 style: ButtonStyle(
                   shape: MaterialStatePropertyAll(
@@ -105,16 +125,30 @@ class _SignInPageState extends State<SignInPage> {
                       width: 24,
                     ),
                     32.pw,
-                    const Text("Sign In with Google"),
+                    const Text(
+                      "Sign In with Google",
+                      style: TextStyle(
+                        color: AppColors.button,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
                   ],
                 ),
               ),
+
+              /// Spacing
               32.ph,
+
+              /// Don't you have an account
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text("Don't you have an account ? "),
-                  ButtonText(onTap: () {}, text: "Create one !")
+                  ButtonText(
+                    onTap: () => Navigator.of(context)
+                        .pushReplacementNamed(SignUpPage.routeName),
+                    text: "Create one !",
+                  )
                 ],
               ),
             ],
@@ -122,5 +156,12 @@ class _SignInPageState extends State<SignInPage> {
         ),
       ),
     );
+  }
+
+  String? emailValidator(String? value) {
+    if (EmailValidator.validate(value ?? "")) {
+      return null;
+    }
+    return "Please provide a valid email address.";
   }
 }
