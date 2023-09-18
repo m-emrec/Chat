@@ -13,6 +13,8 @@ class AppTheme {
     appBarTheme: AppBarTheme(
       titleTextStyle: TextStyles.textTheme.titleLarge,
       centerTitle: true,
+      color: AppColors.scaffold,
+      elevation: 0,
     ),
   );
 

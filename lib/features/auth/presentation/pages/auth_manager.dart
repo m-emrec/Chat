@@ -1,6 +1,6 @@
 import 'package:chat_app/features/auth/presentation/pages/sign_in_page.dart';
 import 'package:chat_app/features/home/presentation/pages/home_page.dart';
-import 'package:chat_app/logger.dart';
+import 'package:chat_app/features/onBoarding/presentation/pages/on_boarding_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -19,6 +19,9 @@ class _AuthManagerState extends State<AuthManager> {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.active) {
           if (snapshot.hasData) {
+            if (snapshot.data!.phoneNumber == null) {
+              return const OnBoarding();
+            }
             return const HomePage();
           } else {
             return const SignInPage();
