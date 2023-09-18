@@ -112,6 +112,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
                   /// Sign Up Button
                   ResponsiveButton(
+                    context: context,
                     screenSize: size,
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {

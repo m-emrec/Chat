@@ -134,6 +134,7 @@ class _ForgetPasswordState extends State<ForgetPassword>
 
               /// Button
               ResponsiveButton(
+                context: context,
                 screenSize: context.screenSize,
                 onPressed: () {
                   sl<AuthBloc>().add(

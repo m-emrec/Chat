@@ -5,7 +5,6 @@ import 'package:chat_app/config/theme/theme.dart';
 import 'package:chat_app/core/extensions/empty_padding.dart';
 
 abstract class CustomTextField extends TextFormField {
-  // final FormFieldValidator<String>? validator;
   final String? hintText;
   final Widget? label;
   final String? labelText;
@@ -26,7 +25,8 @@ abstract class CustomTextField extends TextFormField {
   FormFieldBuilder<String> get builder => (_) {
         assert(
             label != null && labelText == null ||
-                label == null && labelText != null,
+                label == null && labelText != null ||
+                label == null && labelText == null,
             "You can't set label and labelText together.\nOne of them must be null");
         return Column(
           mainAxisSize: MainAxisSize.min,
