@@ -1,6 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:chat_app/config/theme/theme.dart';
 import 'package:chat_app/core/extensions/context_extension.dart';
-import 'package:chat_app/logger.dart';
 import 'package:flutter/material.dart';
 
 class ButtonText extends StatefulWidget {
@@ -30,12 +30,14 @@ class _ButtonTextState extends State<ButtonText> {
       width:
           widget.size != null ? context.screenSize.width * widget.size! : null,
       child: InkWell(
+        splashColor: AppColors.button.withOpacity(0.5),
         onTap: widget.onTap,
         child: Center(
           child: Text(
             widget.text,
             style: widget.style!.copyWith(
               fontWeight: FontWeight.bold,
+              color: AppColors.button,
             ),
           ),
         ),

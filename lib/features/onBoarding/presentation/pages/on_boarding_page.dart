@@ -2,10 +2,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:chat_app/core/extensions/context_extension.dart';
-import 'package:chat_app/core/extensions/empty_padding.dart';
 import 'package:chat_app/core/utils/Buttons/responsive_button.dart';
 import 'package:chat_app/core/utils/Buttons/text_button.dart';
-import 'package:chat_app/core/utils/text%20fields/normal_text_field.dart';
 import 'package:chat_app/features/onBoarding/presentation/widgets/animated_title.dart';
 
 import '../widgets/input_fields.dart';

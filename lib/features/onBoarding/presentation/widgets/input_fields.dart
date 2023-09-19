@@ -1,4 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:chat_app/features/onBoarding/presentation/widgets/input%20fields/name_field.dart';
+import 'package:chat_app/features/onBoarding/presentation/widgets/input%20fields/phone_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -46,7 +48,8 @@ class _InputFieldsState extends State<InputFields> {
     return Expanded(
       child: PageView(
         scrollDirection: Axis.vertical,
-        physics: const NeverScrollableScrollPhysics(),
+        physics:
+            const NeverScrollableScrollPhysics(parent: BouncingScrollPhysics()),
         controller: widget.pageController,
         onPageChanged: (page) {
           /// if page index is equal to 0 set the [_isFirstPage] to true.
@@ -60,79 +63,14 @@ class _InputFieldsState extends State<InputFields> {
         },
         children: [
           /// 1 - Name
-          AnimatedFrame(
-            secondChild: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                /// Title
-                Text(
-                  "Tell Us Your Name",
-                  style: context.textHeme.titleLarge,
-                ),
-
-                /// Spacing
-                32.ph,
-
-                /// TextField
-                NormalTextField(
-                  controller: widget.nameController,
-                  validator: (value) =>
-                      value!.isEmpty ? "Please enter your name." : null,
-                  hintText: "Enter your name.",
-                ),
-              ],
-            ),
+          NameField(
+            nameController: widget.nameController,
           ),
 
           /// 2 - Phone Number
-          AnimatedFrame(
-            secondChild: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                /// title
-                Text(
-                  "Your Phone Number",
-                  style: context.textHeme.titleLarge,
-                ),
-
-                /// Spacing
-                32.ph,
-
-                /// TextField
-                NormalTextField(
-                  controller: widget.phoneController,
-                  validator: (value) =>
-                      value!.isEmpty ? "Please enter a valid number." : null,
-                  hintText: "Phone",
-                ),
-                8.ph,
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: ButtonText(
-                    onTap: () {
-                      if (widget.formKey.currentState!.validate()) {
-                        ///
-                        FirebaseAuth.instance.verifyPhoneNumber(
-                            phoneNumber: widget.phoneController.text,
-                            verificationCompleted: (_) {},
-                            verificationFailed: (e) {
-                              logger.e(e.message);
-                            },
-                            codeSent: (a, b) {
-                              logger.i(a);
-                              logger.i(b);
-                            },
-                            codeAutoRetrievalTimeout: (_) {});
-                      }
-                    },
-                    text: "Skip for now.",
-                    size: 0.3,
-                  ),
-                )
-              ],
-            ),
+          PhoneField(
+            formKey: widget.formKey,
+            phoneController: widget.phoneController,
           ),
 
           ///

@@ -10,5 +10,8 @@ class NormalTextField extends CustomTextField {
     super.labelText,
     super.textInputAction,
     super.textInputType,
+    super.autofocus,
+    super.autovalidateMode,
+    super.textCapitalization,
   });
 }
