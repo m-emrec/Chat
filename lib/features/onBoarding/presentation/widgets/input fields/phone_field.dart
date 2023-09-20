@@ -52,7 +52,7 @@ class _PhoneFieldState extends State<PhoneField> {
           ),
           8.ph,
 
-          /// Skip for now.
+          /// Skip for now
           Align(
             alignment: Alignment.centerRight,
             child: ButtonText(
