@@ -13,5 +13,6 @@ class NormalTextField extends CustomTextField {
     super.autofocus,
     super.autovalidateMode,
     super.textCapitalization,
+    super.focusNode,
   });
 }

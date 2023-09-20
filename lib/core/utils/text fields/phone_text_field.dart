@@ -19,6 +19,7 @@ class PhoneTextField extends CustomTextField {
     super.autovalidateMode,
     super.textCapitalization,
     required this.countryCodeController,
+    super.onChanged,
   });
 
   @override

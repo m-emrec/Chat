@@ -16,6 +16,7 @@ class NameField extends StatefulWidget {
 class _NameFieldState extends State<NameField> {
   @override
   Widget build(BuildContext context) {
+    final FocusNode focusNode = FocusNode();
     return AnimatedFrame(
       secondChild: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -39,6 +40,7 @@ class _NameFieldState extends State<NameField> {
             textCapitalization: TextCapitalization.words,
             autofocus: true,
             autovalidateMode: AutovalidateMode.disabled,
+            focusNode: focusNode,
           ),
         ],
       ),

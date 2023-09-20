@@ -46,7 +46,7 @@ class _PhoneFieldState extends State<PhoneField> {
             controller: widget.phoneController,
             validator: (value) =>
                 value!.isEmpty ? "Please enter a valid number." : null,
-            hintText: "(xxx) xxx xxx xx",
+            hintText: "(xxx) xxx-xxx-xx",
             textInputType: TextInputType.phone,
             countryCodeController: _countryCodeController,
           ),

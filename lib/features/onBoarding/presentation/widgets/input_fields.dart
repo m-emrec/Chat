@@ -1,12 +1,16 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:chat_app/core/utils/text%20fields/expanded_text_field.dart';
 import 'package:chat_app/features/onBoarding/presentation/widgets/input%20fields/name_field.dart';
 import 'package:chat_app/features/onBoarding/presentation/widgets/input%20fields/phone_field.dart';
+import 'package:chat_app/features/onBoarding/presentation/widgets/input%20fields/social_media_and_birthday.dart';
+import 'package:chat_app/features/onBoarding/presentation/widgets/input%20fields/social_media_links.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:chat_app/core/extensions/context_extension.dart';
 import 'package:chat_app/core/extensions/empty_padding.dart';
 import 'package:chat_app/core/utils/Buttons/text_button.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../../../core/utils/text fields/normal_text_field.dart';
 import '../../../../logger.dart';
@@ -62,6 +66,9 @@ class _InputFieldsState extends State<InputFields> {
           }
         },
         children: [
+          /// 3 - Social Media Links and birthday.
+          // SocialMediaAndBirthDay(),
+
           /// 1 - Name
           NameField(
             nameController: widget.nameController,
@@ -72,6 +79,10 @@ class _InputFieldsState extends State<InputFields> {
             formKey: widget.formKey,
             phoneController: widget.phoneController,
           ),
+
+          /// Social Media Link
+
+          /// Birhtday
 
           ///
         ],

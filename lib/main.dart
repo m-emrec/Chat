@@ -30,6 +30,7 @@ class MyApp extends StatelessWidget {
       darkTheme: AppTheme.darkTheme,
       // initialRoute: SignInPage.routeName,
       routes: appRoutes,
+      themeMode: ThemeMode.light,
     );
   }
 }

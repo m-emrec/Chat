@@ -10,9 +10,11 @@ abstract class CustomTextField extends TextFormField {
   final String? labelText;
   final TextInputType? textInputType;
   final TextInputAction? textInputAction;
-  final bool? autofocus;
+  final bool autofocus;
   final TextCapitalization? textCapitalization;
-
+  final bool expands;
+  final FocusNode? focusNode;
+  final Function(String)? onChanged;
   CustomTextField({
     super.key,
     this.hintText,
@@ -23,8 +25,11 @@ abstract class CustomTextField extends TextFormField {
     super.controller,
     super.validator,
     super.autovalidateMode,
-    this.autofocus,
+    this.autofocus = true,
     this.textCapitalization,
+    this.expands = false,
+    this.focusNode,
+    this.onChanged,
   });
 
   Widget get base => Column(
@@ -44,6 +49,8 @@ abstract class CustomTextField extends TextFormField {
                 ),
           4.ph,
           TextFormField(
+            onChanged: onChanged,
+            focusNode: focusNode,
             validator: validator,
             autovalidateMode: super.autovalidateMode,
             controller: controller,
@@ -66,10 +73,12 @@ abstract class CustomTextField extends TextFormField {
               floatingLabelBehavior: FloatingLabelBehavior.always,
               floatingLabelAlignment: FloatingLabelAlignment.start,
             ),
+            expands: expands,
             keyboardType: textInputType,
             textInputAction: textInputAction,
-            autofocus: autofocus ?? false,
+            autofocus: autofocus,
             textCapitalization: textCapitalization ?? TextCapitalization.none,
+            maxLines: expands ? null : 1,
           ),
         ],
       );
