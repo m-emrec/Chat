@@ -145,6 +145,11 @@ class _SignInPageState extends State<SignInPage> {
                   /// Sign in with google
                   OutlinedButton(
                     style: ButtonStyle(
+                      padding:
+                          const MaterialStatePropertyAll(EdgeInsets.symmetric(
+                        vertical: 16,
+                        horizontal: 16,
+                      )),
                       shape: MaterialStatePropertyAll(
                         RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
