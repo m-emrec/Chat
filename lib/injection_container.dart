@@ -5,6 +5,7 @@ import 'package:chat_app/features/auth/domain/usecases/forget_password_use_case.
 import 'package:chat_app/features/auth/domain/usecases/google_sign_in_use_case.dart';
 import 'package:chat_app/features/auth/domain/usecases/sign_in_use_case.dart';
 import 'package:chat_app/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:chat_app/features/onBoarding/presentation/bloc/onboarding_bloc.dart';
 import 'package:get_it/get_it.dart';
 
 import 'features/auth/domain/usecases/sign_up_use_case.dart';
@@ -30,5 +31,9 @@ Future<void> initializeDependencies() async {
   /// bloc
   sl.registerSingleton(AuthBloc(sl(), sl(), sl(), sl()));
 
-  ///
+  //// End of Auth
+
+  /// OnBoarding
+  /// Bloc
+  sl.registerSingleton<OnboardingBloc>(OnboardingBloc());
 }

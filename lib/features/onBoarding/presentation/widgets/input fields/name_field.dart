@@ -1,8 +1,10 @@
 import 'package:chat_app/core/extensions/context_extension.dart';
 import 'package:chat_app/core/extensions/empty_padding.dart';
+import 'package:chat_app/features/onBoarding/presentation/bloc/onboarding_bloc.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../core/utils/text fields/normal_text_field.dart';
+import '../../../../../injection_container.dart';
 import '../animated_title.dart';
 
 class NameField extends StatefulWidget {
@@ -14,6 +16,15 @@ class NameField extends StatefulWidget {
 }
 
 class _NameFieldState extends State<NameField> {
+  late OnboardingBloc _onboardingBloc;
+  @override
+  void initState() {
+    _onboardingBloc = sl<OnboardingBloc>();
+    _onboardingBloc.add(InitialEvent());
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final FocusNode focusNode = FocusNode();

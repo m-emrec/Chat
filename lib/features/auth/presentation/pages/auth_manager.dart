@@ -24,7 +24,7 @@ class _AuthManagerState extends State<AuthManager> {
                 snapshot.data!.phoneNumber!.isEmpty) {
               return const OnBoarding();
             }
-            logger.i(snapshot.data!.phoneNumber);
+
             return const HomePage();
           } else {
             return const SignInPage();

@@ -1,8 +1,11 @@
 import 'package:chat_app/core/extensions/context_extension.dart';
 import 'package:chat_app/core/extensions/empty_padding.dart';
 import 'package:chat_app/core/utils/text%20fields/phone_text_field.dart';
+import 'package:chat_app/features/onBoarding/presentation/bloc/onboarding_bloc.dart';
+import 'package:chat_app/injection_container.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/utils/Buttons/text_button.dart';
 import '../../../../../core/utils/text fields/normal_text_field.dart';
@@ -23,6 +26,15 @@ class PhoneField extends StatefulWidget {
 }
 
 class _PhoneFieldState extends State<PhoneField> {
+  late OnboardingBloc _onboardingBloc;
+
+  @override
+  void initState() {
+    _onboardingBloc = sl<OnboardingBloc>();
+    _onboardingBloc.add(WaitForNumberVerificationEvent());
+    super.initState();
+  }
+
   final TextEditingController _countryCodeController = TextEditingController();
   String _phoneNumber = "";
   @override
@@ -50,56 +62,30 @@ class _PhoneFieldState extends State<PhoneField> {
             textInputType: TextInputType.phone,
             countryCodeController: _countryCodeController,
           ),
-          8.ph,
+          16.ph,
 
-          /// Skip for now
+          /// Send Vericification
           Align(
             alignment: Alignment.centerRight,
-            child: ButtonText(
-              onTap: () {
-                if (widget.formKey.currentState!.validate()) {
-                  _phoneNumber =
-                      _countryCodeController.text + widget.phoneController.text;
-
-                  //   ///
-                  //   FirebaseAuth.instance.verifyPhoneNumber(
-                  //       phoneNumber: widget.phoneController.text,
-                  //       verificationCompleted: (_) {
-                  //         logger.i("Complete");
-                  //       },
-                  //       verificationFailed: (e) {
-                  //         logger.e(e.message);
-                  //       },
-                  //       codeSent: (id, code) {
-                  //         logger.i(code);
-                  //         showDialog(
-                  //             context: context,
-                  //             builder: (_) {
-                  //               final TextEditingController _c =
-                  //                   TextEditingController();
-                  //               return AlertDialog(
-                  //                 content: TextField(
-                  //                   controller: _c,
-                  //                 ),
-                  //                 actions: [
-                  //                   ButtonText(
-                  //                       onTap: () {
-                  //                         final _cre =
-                  //                             PhoneAuthProvider.credential(
-                  //                                 verificationId: id,
-                  //                                 smsCode: _c.text);
-                  //                         logger.i(_cre);
-                  //                       },
-                  //                       text: "Done")
-                  //                 ],
-                  //               );
-                  //             });
-                  //       },
-                  //       codeAutoRetrievalTimeout: (_) {});
-                }
+            child: BlocBuilder<OnboardingBloc, OnboardingState>(
+              bloc: _onboardingBloc,
+              builder: (context, state) {
+                return ButtonText(
+                  onTap: state is VerificationCodeSendedState
+                      ? () {}
+                      : () {
+                          if (widget.formKey.currentState!.validate()) {
+                            _phoneNumber = _countryCodeController.text +
+                                widget.phoneController.text;
+                            _onboardingBloc.add(
+                                SendVerificationEvent(_phoneNumber, context));
+                            //   ///
+                          }
+                        },
+                  text: "Send Verification Code",
+                  // size: 0.3,
+                );
               },
-              text: "Send Verification Code.",
-              size: 0.3,
             ),
           )
         ],
