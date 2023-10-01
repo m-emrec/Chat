@@ -4,6 +4,12 @@ class AppTheme {
   ///
   ///
   static ThemeData lightTheme = ThemeData(
+    pageTransitionsTheme: const PageTransitionsTheme(
+      builders: {
+        TargetPlatform.android: FadeUpwardsPageTransitionsBuilder(),
+        TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+      },
+    ),
     brightness: Brightness.light,
     scaffoldBackgroundColor: AppColors.scaffold,
     cardTheme: const CardTheme(
