@@ -36,7 +36,7 @@ class _NavbarState extends State<Navbar> {
             blurRadius: 8,
             offset: Offset(0, -2),
             spreadRadius: 0,
-          )
+          ),
         ],
       ),
       child: BottomNavigationBar(
