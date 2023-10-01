@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/utils/nav_bar.dart';
-
 class ContactsPage extends StatefulWidget {
   static const String routeName = "contacts";
 
@@ -14,8 +12,10 @@ class ContactsPage extends StatefulWidget {
 class _ContactsPageState extends State<ContactsPage> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      bottomNavigationBar: Navbar(navIndex: 1),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Contacs"),
+      ),
       body: Center(
         child: Text("Contacts"),
       ),
