@@ -14,11 +14,13 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Center(
             child: ElevatedButton(
-                onPressed: () => FirebaseAuth.instance.signOut(),
-                child: Text("Fuck Off")),
+              onPressed: () => FirebaseAuth.instance.signOut(),
+              child: Text("Fuck Off"),
+            ),
           ),
         ],
       ),
