@@ -19,7 +19,7 @@ class _HomePageState extends State<HomePage> {
           Center(
             child: ElevatedButton(
               onPressed: () => FirebaseAuth.instance.signOut(),
-              child: Text("Fuck Off"),
+              child: const Text("Fuck Off"),
             ),
           ),
         ],

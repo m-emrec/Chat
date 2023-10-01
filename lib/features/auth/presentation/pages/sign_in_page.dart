@@ -54,11 +54,23 @@ class _SignInPageState extends State<SignInPage> {
           child: BlocConsumer<AuthBloc, AuthState>(
             bloc: _authBloc,
             listener: (context, state) {
+              if (state is AuthLoading) {
+                showDialog(
+                  barrierDismissible: false,
+                  context: context,
+                  builder: (_) => const Center(
+                    child: CircularProgressIndicator.adaptive(),
+                  ),
+                );
+              }
               if (state is AuthSuccess) {
+                Navigator.of(context).pop();
                 Navigator.of(context).pushReplacementNamed("/");
               }
               if (state is AuthFail) {
                 logger.e(state.exception);
+                Navigator.of(context).pop();
+
                 ScaffoldMessenger.of(context).showSnackBar(
                   ErrorSnack(
                     text: state.exception,

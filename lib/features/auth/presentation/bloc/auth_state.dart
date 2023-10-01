@@ -13,9 +13,8 @@ abstract class AuthActionState extends AuthState {
 
 class AuthInitial extends AuthState {}
 
-class AuthLoading extends AuthState {}
-
 /// Action States
+class AuthLoading extends AuthActionState {}
 
 class AuthSuccess extends AuthActionState {}
 

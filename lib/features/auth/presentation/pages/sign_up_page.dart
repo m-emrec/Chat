@@ -64,10 +64,23 @@ class _SignUpPageState extends State<SignUpPage> {
       body: BlocConsumer<AuthBloc, AuthState>(
         bloc: _authBloc,
         listener: (context, state) {
+          if (state is AuthLoading) {
+            showDialog(
+              barrierDismissible: false,
+              context: context,
+              builder: (_) => const Center(
+                child: CircularProgressIndicator.adaptive(),
+              ),
+            );
+          }
           if (state is AuthSuccess) {
+            Navigator.of(context).pop();
+
             Navigator.of(context).pushReplacementNamed("/");
           }
           if (state is AuthFail) {
+            Navigator.of(context).pop();
+
             logger.e(state.exception);
             ScaffoldMessenger.of(context).showSnackBar(
               ErrorSnack(

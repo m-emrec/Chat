@@ -26,7 +26,7 @@ class _ForgetPasswordState extends State<ForgetPassword>
     with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   final TextEditingController _emailController = TextEditingController();
-
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   @override
   void initState() {
     _animationController = AnimationController(
@@ -94,11 +94,13 @@ class _ForgetPasswordState extends State<ForgetPassword>
       animationController: _animationController,
       backgroundColor: AppColors.scaffold.withOpacity(0.3),
       showDragHandle: true,
-      onDragEnd: (details, {isClosing = false}) {
+      onDragEnd: (details, {isClosing = true}) {
+        logger.i(_animationController.value);
         _velocity = details.velocity.pixelsPerSecond.direction;
       },
 
       onClosing: () {
+        logger.i("message");
         if (_velocity > 0) {
           Navigator.of(context).pop();
         }
@@ -115,42 +117,47 @@ class _ForgetPasswordState extends State<ForgetPassword>
         child: SizedBox(
           width: context.screenSize.width * 0.9,
           height: context.screenSize.height * 0.4 + bottomInset,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              /// Title
-              Text(
-                "Forget Pasword",
-                style: context.textHeme.titleLarge,
-              ),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                /// Title
+                Text(
+                  "Forget Pasword",
+                  style: context.textHeme.titleLarge,
+                ),
 
-              /// Email Field
-              NormalTextField(
-                controller: _emailController,
-                labelText: "Email",
-                validator: emailValidator,
-                textInputType: TextInputType.emailAddress,
-              ),
+                /// Email Field
+                NormalTextField(
+                  controller: _emailController,
+                  labelText: "Email",
+                  validator: emailValidator,
+                  textInputType: TextInputType.emailAddress,
+                ),
 
-              /// Button
-              ResponsiveButton(
-                context: context,
-                screenSize: context.screenSize,
-                onPressed: () {
-                  sl<AuthBloc>().add(
-                    AuthForgetPasswordEvent(_emailController.text),
-                  );
-                  Navigator.of(context).pop();
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SuccessSnack(
-                      text:
-                          "Password reset email has been send to ${_emailController.text}",
-                    ),
-                  );
-                },
-                child: const Text("Send"),
-              ),
-            ],
+                /// Button
+                ResponsiveButton(
+                  context: context,
+                  screenSize: context.screenSize,
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      sl<AuthBloc>().add(
+                        AuthForgetPasswordEvent(_emailController.text),
+                      );
+                      Navigator.of(context).pop();
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SuccessSnack(
+                          text:
+                              "Password reset email has been send to ${_emailController.text}",
+                        ),
+                      );
+                    }
+                  },
+                  child: const Text("Send"),
+                ),
+              ],
+            ),
           ),
         ),
       ),
