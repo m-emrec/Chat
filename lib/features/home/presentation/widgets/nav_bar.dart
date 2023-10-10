@@ -18,7 +18,7 @@ class _NavbarState extends State<Navbar> {
   @override
   void initState() {
     _homeBloc = widget.homeBloc;
-    _navIndex = 0;
+    _navIndex = 2;
     super.initState();
   }
 

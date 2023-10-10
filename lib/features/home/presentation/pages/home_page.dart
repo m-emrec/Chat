@@ -20,7 +20,8 @@ class _HomePageState extends State<HomePage> {
   final HomeBloc _homeBloc = HomeBloc();
   @override
   void initState() {
-    _homeBloc.add(HomeChatViewEvent());
+    /// TODO : Change this
+    _homeBloc.add(HomeProfileViewEvent());
     super.initState();
   }
 
