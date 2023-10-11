@@ -39,26 +39,26 @@ class _SocialMediaLinksExpandedState extends State<SocialMediaLinksExpanded> {
       size: 32,
     ),
     8.pw,
-    // const FaIcon(
-    //   FontAwesomeIcons.facebook,
-    //   size: 32,
-    // ),
-    // 8.pw,
-    // const FaIcon(
-    //   FontAwesomeIcons.instagram,
-    //   size: 32,
-    // ),
-    // 8.pw,
-    // const FaIcon(
-    //   FontAwesomeIcons.twitter,
-    //   size: 32,
-    // ),
-    // 8.pw,
-    // const FaIcon(
-    //   FontAwesomeIcons.facebook,
-    //   size: 32,
-    // ),
-    // 8.pw,
+    const FaIcon(
+      FontAwesomeIcons.facebook,
+      size: 32,
+    ),
+    8.pw,
+    const FaIcon(
+      FontAwesomeIcons.instagram,
+      size: 32,
+    ),
+    8.pw,
+    const FaIcon(
+      FontAwesomeIcons.twitter,
+      size: 32,
+    ),
+    8.pw,
+    const FaIcon(
+      FontAwesomeIcons.facebook,
+      size: 32,
+    ),
+    8.pw,
   ];
   @override
   Widget build(BuildContext context) {

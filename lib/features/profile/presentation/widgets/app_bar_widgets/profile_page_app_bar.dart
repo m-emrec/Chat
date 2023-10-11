@@ -7,7 +7,7 @@ import 'package:chat_app/features/profile/presentation/widgets/app_bar_widgets/s
 import 'package:chat_app/features/profile/presentation/widgets/app_bar_widgets/social_media_links_expanded.dart';
 import 'package:flutter/material.dart';
 
-import 'log_out_button.dart';
+import 'profile_options_button.dart';
 
 class ProfilePageAppBar extends StatefulWidget {
   const ProfilePageAppBar({super.key});
@@ -74,8 +74,8 @@ class _ProfilePageAppBarState extends State<ProfilePageAppBar> {
             },
           ),
 
-          //* Log out Button
-          const LogOutButton(),
+          //* Options Button
+          const ProfileOptionsButton(),
 
           // * Name and Social Media Accounts Row
           const AppBarTitle(),

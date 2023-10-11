@@ -5,4 +5,5 @@ extension ImageExtension on String {
   String get image => "${base}images/$this";
 
   String get toPng => "$this.png";
+  String get toSvg => "$this.svg";
 }

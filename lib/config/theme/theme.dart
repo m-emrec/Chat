@@ -12,16 +12,26 @@ class AppTheme {
     ),
     brightness: Brightness.light,
     scaffoldBackgroundColor: AppColors.scaffold,
-    cardTheme: const CardTheme(
-      color: AppColors.cardColor,
-    ),
+
+    ///* TextTheme
     textTheme: TextStyles.textTheme,
+
+    ///// Widget Themes
+    ///*App bar theme
     appBarTheme: AppBarTheme(
       titleTextStyle: TextStyles.textTheme.titleLarge,
       centerTitle: true,
       color: AppColors.scaffold,
       elevation: 0,
     ),
+
+    ///*Card Theme
+    cardTheme: const CardTheme(
+      color: AppColors.cardColor,
+    ),
+
+    ///* Icon Theme
+    iconTheme: const IconThemeData(),
   );
 
   ////                                                d

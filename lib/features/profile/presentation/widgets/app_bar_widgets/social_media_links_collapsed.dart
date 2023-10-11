@@ -37,15 +37,15 @@ class _SocialMediaLinksCollapsedState extends State<SocialMediaLinksCollapsed> {
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             border: Border.all(
-              color: AppColors.button.withOpacity(0.3),
+              color: AppColors.button.withOpacity(0.8),
             ),
           ),
           // * Icon
-          child: Padding(
-            padding: const EdgeInsets.all(4.0),
+          child: const Padding(
+            padding: EdgeInsets.all(4.0),
             child: FaIcon(
               FontAwesomeIcons.plus,
-              color: AppColors.button.withOpacity(0.6),
+              color: AppColors.button,
               size: 16,
             ),
           ),
