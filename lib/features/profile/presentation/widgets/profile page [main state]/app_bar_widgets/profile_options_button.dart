@@ -5,8 +5,8 @@ import 'package:chat_app/core/extensions/image_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../../../../../config/theme/theme.dart';
-import '../../../../../logger.dart';
+import '../../../../../../config/theme/theme.dart';
+import '../../../../../../logger.dart';
 
 class ProfileOptionsButton extends StatefulWidget {
   const ProfileOptionsButton({super.key});
@@ -44,7 +44,7 @@ class _ProfileOptionsButtonState extends State<ProfileOptionsButton> {
                   crossFadeState: _showOptions
                       ? CrossFadeState.showFirst
                       : CrossFadeState.showSecond,
-                  duration: const Duration(milliseconds: 250),
+                  duration: const Duration(milliseconds: 350),
 
                   ///* Expanded Menu
                   firstChild: Column(

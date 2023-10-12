@@ -12,6 +12,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<HomeChatViewEvent>(onHomeChatViewEvent);
     on<HomeContactsViewEvent>(onHomeContactsViewEvent);
     on<HomeProfileViewEvent>(onHomeProfileViewEvent);
+    on<HomeProfileViewEditEvent>(onHomeProfileViewEditEvent);
   }
 
   FutureOr<void> onHomeChatViewEvent(
@@ -27,5 +28,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   FutureOr<void> onHomeContactsViewEvent(
       HomeContactsViewEvent event, Emitter<HomeState> emit) {
     emit(HomeContactsViewStae());
+  }
+
+  FutureOr<void> onHomeProfileViewEditEvent(
+      HomeProfileViewEditEvent event, Emitter<HomeState> emit) {
+    emit(HomeProfileViewEditState());
   }
 }

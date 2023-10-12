@@ -1,5 +1,5 @@
 import 'package:chat_app/core/extensions/context_extension.dart';
-import 'package:chat_app/features/profile/presentation/widgets/user_profile_body_widgets/status_text.dart';
+import 'package:chat_app/features/profile/presentation/widgets/profile%20page%20%5Bmain%20state%5D/user_profile_body_widgets/status_text.dart';
 import 'package:flutter/material.dart';
 
 class StatusWidget extends StatefulWidget {

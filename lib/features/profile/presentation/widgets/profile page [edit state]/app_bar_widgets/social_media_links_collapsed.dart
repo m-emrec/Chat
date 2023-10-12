@@ -17,30 +17,37 @@ class _SocialMediaLinksCollapsedState extends State<SocialMediaLinksCollapsed> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        const FaIcon(
+        // ! insta
+        FaIcon(
           FontAwesomeIcons.instagram,
           size: 32,
+          color: Colors.deepPurple.shade100,
         ),
         8.pw,
-        const FaIcon(
+
+        //! twitter
+        FaIcon(
           FontAwesomeIcons.twitter,
           size: 32,
+          color: Colors.blue.shade700,
         ),
         8.pw,
-        const FaIcon(
+        //! facebook
+        FaIcon(
           FontAwesomeIcons.facebook,
           size: 32,
+          color: Colors.blue.shade700,
         ),
         8.pw,
-        // * See more Button
+        // ! See more Button
         Container(
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             border: Border.all(
-              color: AppColors.button.withOpacity(0.8),
+              color: AppColors.button.withOpacity(0.9),
             ),
           ),
-          // * Icon
+          // ! Icon
           child: const Padding(
             padding: EdgeInsets.all(4.0),
             child: FaIcon(

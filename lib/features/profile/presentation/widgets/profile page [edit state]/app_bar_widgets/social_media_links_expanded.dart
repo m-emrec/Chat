@@ -2,7 +2,7 @@ import 'package:chat_app/core/extensions/empty_padding.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../../../../../config/theme/theme.dart';
+import '../../../../../../config/theme/theme.dart';
 
 class SocialMediaLinksExpanded extends StatefulWidget {
   const SocialMediaLinksExpanded({super.key});

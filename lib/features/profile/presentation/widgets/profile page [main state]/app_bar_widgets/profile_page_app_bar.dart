@@ -2,9 +2,9 @@ import 'dart:ui';
 
 import 'package:chat_app/config/theme/theme.dart';
 import 'package:chat_app/core/extensions/context_extension.dart';
-import 'package:chat_app/features/profile/presentation/widgets/app_bar_widgets/apbar_title_row.dart';
-import 'package:chat_app/features/profile/presentation/widgets/app_bar_widgets/social_media_links_collapsed.dart';
-import 'package:chat_app/features/profile/presentation/widgets/app_bar_widgets/social_media_links_expanded.dart';
+import 'package:chat_app/features/profile/presentation/widgets/profile%20page%20%5Bmain%20state%5D/app_bar_widgets/apbar_title_row.dart';
+import 'package:chat_app/features/profile/presentation/widgets/profile%20page%20%5Bmain%20state%5D/app_bar_widgets/social_media_links_collapsed.dart';
+import 'package:chat_app/features/profile/presentation/widgets/profile%20page%20%5Bmain%20state%5D/app_bar_widgets/social_media_links_expanded.dart';
 import 'package:flutter/material.dart';
 
 import 'profile_options_button.dart';

@@ -14,3 +14,5 @@ class HomeChatViewStae extends HomeState {}
 class HomeContactsViewStae extends HomeState {}
 
 class HomeProfileViewStae extends HomeState {}
+
+class HomeProfileViewEditState extends HomeState {}

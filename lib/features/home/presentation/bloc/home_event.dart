@@ -12,3 +12,5 @@ class HomeChatViewEvent extends HomeEvent {}
 class HomeContactsViewEvent extends HomeEvent {}
 
 class HomeProfileViewEvent extends HomeEvent {}
+
+class HomeProfileViewEditEvent extends HomeEvent {}

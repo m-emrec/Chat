@@ -3,6 +3,7 @@ import 'package:chat_app/features/chat/presentation/pages/chat_page.dart';
 import 'package:chat_app/features/home/presentation/widgets/nav_bar.dart';
 import 'package:chat_app/features/contacts/presentation/pages/contacts_page.dart';
 import 'package:chat_app/features/profile/presentation/pages/profile_page.dart';
+import 'package:chat_app/features/profile/presentation/pages/profile_page_edit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -57,6 +58,11 @@ class _HomePageState extends State<HomePage> {
                 homeBloc: _homeBloc,
               ),
               body: const ProfilePage(),
+            );
+          case HomeProfileViewEditState:
+            return const Scaffold(
+              backgroundColor: AppColors.scaffold,
+              body: ProfilePageEdit(),
             );
           default:
             return const SizedBox();
