@@ -47,6 +47,16 @@ class TextStyles {
       fontSize: 24,
       fontWeight: FontWeight.bold,
     ),
+    labelLarge: TextStyle(
+      color: Color(0xFF153243),
+      fontSize: 16,
+      fontWeight: FontWeight.bold,
+    ),
+    labelSmall: TextStyle(
+      color: Color(0xFF153243),
+      fontSize: 14,
+      fontWeight: FontWeight.bold,
+    ),
   );
 }
 
