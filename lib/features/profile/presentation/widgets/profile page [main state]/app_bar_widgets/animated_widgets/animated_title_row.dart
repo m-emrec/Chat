@@ -1,6 +1,10 @@
 import 'package:chat_app/core/extensions/context_extension.dart';
+import 'package:chat_app/features/auth/data/models/user_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../../../injection_container.dart';
+import '../../../../bloc/profile_bloc.dart';
 import '../social_media_links_collapsed.dart';
 
 class AnimatedTitleRow extends StatefulWidget {
@@ -55,12 +59,19 @@ class _AnimatedTitleRowState extends State<AnimatedTitleRow>
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 // * User name
-                Expanded(
-                  child: Text(
-                    "Mustafa Emre Çelik",
-                    style: context.textHeme.titleLarge!.copyWith(fontSize: 16),
-                    overflow: TextOverflow.ellipsis,
-                  ),
+                BlocBuilder<ProfileBloc, ProfileState>(
+                  bloc: sl<ProfileBloc>(),
+                  builder: (context, state) {
+                    state as ProfileLoadedSuccessState;
+                    return Expanded(
+                      child: Text(
+                        state.data.name ?? "",
+                        style:
+                            context.textHeme.titleLarge!.copyWith(fontSize: 16),
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    );
+                  },
                 ),
                 // * Social Media
                 const SocialMediaLinksCollapsed(),

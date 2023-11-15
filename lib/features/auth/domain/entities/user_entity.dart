@@ -3,11 +3,12 @@ class UserEntity {
   final String? uid;
   final String? email;
   final String? name;
-  final String? address;
+  final String? photoUrl;
+
   final String? phoneNumber;
   final List<String>? socialMediaLinks;
   final DateTime? birthDay;
-  final bool? isOnline;
+  final String? status;
 
   /// TODO:Change this to [Contacts]
   final List<String>? contacts;
@@ -16,11 +17,11 @@ class UserEntity {
     this.uid,
     this.email,
     this.name,
-    this.address,
     this.phoneNumber,
     this.socialMediaLinks,
     this.birthDay,
-    this.isOnline,
+    this.status,
     this.contacts,
+    this.photoUrl,
   });
 }

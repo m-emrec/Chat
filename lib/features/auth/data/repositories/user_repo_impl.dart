@@ -35,8 +35,6 @@ class UserRepoImpl implements UserRepo {
   @override
   Future<DataState> signIn(
       {required String email, required String password}) async {
-    FirebaseAuth.instance
-        .signInWithEmailAndPassword(email: email, password: password);
     try {
       final _auth = FirebaseAuth.instance;
       await _auth.signInWithEmailAndPassword(email: email, password: password);
@@ -60,6 +58,10 @@ class UserRepoImpl implements UserRepo {
         accessToken: _gAuth.accessToken,
       );
       await _auth.signInWithCredential(credential);
+      await _firestoreConnection.registerDataToFireStore(
+        email: _auth.currentUser!.email!,
+        uid: _auth.currentUser!.uid,
+      );
       return DataSuccess(null);
     } catch (e) {
       logger.e(e);
@@ -76,10 +78,7 @@ class UserRepoImpl implements UserRepo {
       final user = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
 
-      dataState = await _firestoreConnection.registerDataToFireStore(
-        email: user.user!.email!,
-        uid: user.user!.uid,
-      );
+      return DataSuccess(null);
     } on FirebaseAuthException catch (e) {
       logger.e(e.message);
       return DataFailed(e.code);
@@ -87,12 +86,12 @@ class UserRepoImpl implements UserRepo {
       logger.e(e.toString());
       return DataFailed(e.toString());
     }
-
-    return dataState;
   }
 
   @override
-  Future<DataState<UserModel>> fetchUserData({required String uid}) {
-    throw UnimplementedError();
+  Future<DataState> fetchUserData({required String uid}) async {
+    DataState dataState =
+        await _firestoreConnection.fetchUserDataFromFireStore(uid);
+    return dataState;
   }
 }

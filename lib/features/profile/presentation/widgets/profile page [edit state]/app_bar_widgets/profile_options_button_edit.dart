@@ -1,6 +1,8 @@
 import 'dart:ui';
 
 import 'package:chat_app/core/extensions/empty_padding.dart';
+import 'package:chat_app/features/profile/presentation/bloc/profile_bloc.dart';
+import 'package:chat_app/injection_container.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../../config/theme/theme.dart';
@@ -14,6 +16,18 @@ class ProfileOptionsButtonEdit extends StatefulWidget {
 }
 
 class _ProfileOptionsButtonEditState extends State<ProfileOptionsButtonEdit> {
+  late ProfileBloc _profileBloc;
+
+  addGetDataEvent() {
+    _profileBloc.add(ProfileGetDataEvent());
+  }
+
+  @override
+  void initState() {
+    _profileBloc = sl<ProfileBloc>();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Positioned(
@@ -41,34 +55,20 @@ class _ProfileOptionsButtonEditState extends State<ProfileOptionsButtonEdit> {
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    /// Cancel Edit Button
-                    GestureDetector(
-                      onTap: () {
-                        setState(() {});
-                      },
-                      child: const Tooltip(
-                        message: "Cancel Edit",
-                        child: Icon(
-                          Icons.cancel_outlined,
-                          color: AppColors.button,
-                        ),
-                      ),
-                    ),
+                    // //! Cancel Edit Button
+                    // // GestureDetector(
+                    // //   onTap: () => addGetDataEvent(),
+                    // //   child: const Tooltip(
+                    // //     message: "Cancel Edit",
+                    // //     child: Icon(
+                    // //       Icons.cancel_outlined,
+                    // //       color: AppColors.button,
+                    // //     ),
+                    // //   ),
+                    // // ),
 
-                    /// Spacing
-                    16.ph,
-
-                    /// Save Settings Button
-                    const Tooltip(
-                      message: "Save Settings",
-                      child: Icon(
-                        color: AppColors.button,
-                        Icons.check,
-                      ),
-                    ),
-
-                    /// Spacing
-                    16.ph,
+                    // // /// Spacing
+                    // // 16.ph,
 
                     /// Edit İmage Button
                     const Tooltip(
@@ -76,6 +76,21 @@ class _ProfileOptionsButtonEditState extends State<ProfileOptionsButtonEdit> {
                       child: Icon(
                         Icons.image_outlined,
                         color: AppColors.button,
+                      ),
+                    ),
+
+                    /// Spacing
+                    16.ph,
+
+                    //! Save Settings Button
+                    Tooltip(
+                      message: "Save Settings",
+                      child: GestureDetector(
+                        onTap: () => addGetDataEvent(),
+                        child: const Icon(
+                          color: AppColors.button,
+                          Icons.check,
+                        ),
                       ),
                     ),
                   ],

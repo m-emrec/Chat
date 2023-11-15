@@ -1,9 +1,16 @@
 import 'package:chat_app/core/extensions/context_extension.dart';
 import 'package:chat_app/core/extensions/empty_padding.dart';
-import 'package:chat_app/core/utils/Buttons/text_button.dart';
-import 'package:chat_app/features/profile/presentation/widgets/profile%20page%20%5Bmain%20state%5D/user_profile_body_widgets/status_widget.dart';
-import 'package:chat_app/logger.dart';
+import 'package:chat_app/features/profile/presentation/widgets/profile%20page%20%5Bedit%20state%5D/user_profile_body_widgets/change_password_button.dart';
+import 'package:chat_app/features/profile/presentation/widgets/profile%20page%20%5Bedit%20state%5D/user_profile_body_widgets/email_field_edit_page.dart';
+import 'package:chat_app/features/profile/presentation/widgets/profile%20page%20%5Bedit%20state%5D/user_profile_body_widgets/phone_field_edit_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../../../../core/utils/Buttons/text_button.dart';
+import '../../../../../../injection_container.dart';
+import '../../../../../../logger.dart';
+import '../../../../../auth/data/models/user_model.dart';
+import '../../../bloc/profile_bloc.dart';
 
 class ProfileBodyEdit extends StatefulWidget {
   const ProfileBodyEdit({super.key});
@@ -13,80 +20,53 @@ class ProfileBodyEdit extends StatefulWidget {
 }
 
 class _ProfileBodyEditState extends State<ProfileBodyEdit> {
-  final TextEditingController _emailController =
-      TextEditingController(text: "m.emrec45@gmail.com");
-  final TextEditingController _phoneController =
-      TextEditingController(text: "5550286812");
+  // ! late variables
+  late ProfileBloc _profileBloc;
+  late ProfileUpdateState state;
+  late UserModel userData;
+
+  @override
+  void initState() {
+    //! define [ProfileBloc]
+    _profileBloc = sl<ProfileBloc>();
+
+    // ! get user name from the state
+    state = _profileBloc.state as ProfileUpdateState;
+
+    userData = state.data;
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: SizedBox(
-        width: context.screenSize.width,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 32),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              //! email
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Email",
-                    style: context.textHeme.labelLarge,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 8.0, top: 16.0),
-                    child: TextField(
-                      controller: _emailController,
-                    ),
-                  ),
-                ],
-              ),
+    return SizedBox(
+      width: double.infinity,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 32),
+        child: BlocBuilder<ProfileBloc, ProfileState>(
+          bloc: _profileBloc,
+          builder: (context, state) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                //! email
+                const EmailFieldEditPage(),
 
-              //! Change password buttton [TextButton]
-              // ButtonText(
-              //   onTap: () {},
-              //   text: "Change Password",
-              //   size: 0.4,
-              // ),
+                // ? Vertical Spacing
+                8.ph,
+                //! Change password buttton [TextButton]
+                const ChangePasswordButton(),
+                // ? Vertical Spacing
+                16.ph,
+                //!  phone
+                const PhoneFieldEditPage(),
 
-              16.ph,
-
-              //!  phone
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Phone",
-                    style: context.textHeme.labelLarge,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 8.0, top: 16.0),
-                    child: TextField(
-                      controller: _phoneController,
-                    ),
-                  ),
-                ],
-              ),
-              16.ph,
-
-              //! birthday
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Birthday",
-                    style: context.textHeme.labelLarge,
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.only(left: 8.0, top: 16.0),
-                    child: Text("29.06.1999"),
-                  ),
-                ],
-              ),
-            ],
-          ),
+                // ? Vertical Spacing
+                16.ph,
+              ],
+            );
+          },
         ),
       ),
     );

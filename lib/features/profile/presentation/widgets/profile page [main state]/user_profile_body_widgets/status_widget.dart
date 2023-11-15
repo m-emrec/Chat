@@ -1,5 +1,6 @@
 import 'package:chat_app/core/extensions/context_extension.dart';
 import 'package:chat_app/features/profile/presentation/widgets/profile%20page%20%5Bmain%20state%5D/user_profile_body_widgets/status_text.dart';
+import 'package:chat_app/logger.dart';
 import 'package:flutter/material.dart';
 
 class StatusWidget extends StatefulWidget {
@@ -14,11 +15,11 @@ class _StatusWidgetState extends State<StatusWidget> {
   late TextEditingController _statusController;
   @override
   void initState() {
-    _statusController = widget.controller..text = "online";
+    _statusController = widget.controller;
+    statusManager(_statusController.text);
     super.initState();
   }
 
-//TODO Get it from the Database
   Widget _status = const SizedBox();
 
   /// Manages status
@@ -65,9 +66,11 @@ class _StatusWidgetState extends State<StatusWidget> {
   @override
   Widget build(BuildContext context) {
     return DropdownMenu(
+      initialSelection: "online",
       controller: _statusController,
       width: context.screenSize.width - 32,
 
+      //TODO: Update Database
       onSelected: (value) => statusManager(value!),
 
       ///! title
@@ -81,7 +84,7 @@ class _StatusWidgetState extends State<StatusWidget> {
               style: context.textHeme.labelLarge,
             ),
 
-            ///! Status Text
+            //! Status Text
             _status,
           ],
         ),

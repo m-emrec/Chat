@@ -35,6 +35,7 @@ class _SignInPageState extends State<SignInPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   late AuthBloc _authBloc;
+
   @override
   void initState() {
     _authBloc = sl<AuthBloc>();
@@ -68,8 +69,9 @@ class _SignInPageState extends State<SignInPage> {
                 Navigator.of(context).pushReplacementNamed("/");
               }
               if (state is AuthFail) {
-                logger.e(state.exception);
                 Navigator.of(context).pop();
+
+                logger.e(state.exception);
 
                 ScaffoldMessenger.of(context).showSnackBar(
                   ErrorSnack(

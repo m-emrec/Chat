@@ -16,18 +16,12 @@ class _AppBarTitleState extends State<AppBarTitle> {
     return Positioned(
       bottom: 0,
       child: ClipRRect(
-        borderRadius: const BorderRadius.only(
-          bottomLeft: Radius.circular(32),
-          bottomRight: Radius.circular(32),
-        ),
-        child: ClipRRect(
-          child: BackdropFilter(
-            filter: ImageFilter.blur(
-              sigmaX: 25,
-              sigmaY: 25,
-            ),
-            child: const AnimatedTitleRow(),
+        child: BackdropFilter(
+          filter: ImageFilter.blur(
+            sigmaX: 25,
+            sigmaY: 25,
           ),
+          child: const AnimatedTitleRow(),
         ),
       ),
     );

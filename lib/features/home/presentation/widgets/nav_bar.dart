@@ -18,7 +18,7 @@ class _NavbarState extends State<Navbar> {
   @override
   void initState() {
     _homeBloc = widget.homeBloc;
-    _navIndex = 2;
+    _navIndex = 0;
     super.initState();
   }
 
@@ -104,7 +104,7 @@ class _NavbarState extends State<Navbar> {
               radius: 16,
               child: Center(
                 child: Text(
-                  FirebaseAuth.instance.currentUser!.displayName![0],
+                  FirebaseAuth.instance.currentUser!.displayName?[0] ?? "",
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     color: AppColors.scaffold,

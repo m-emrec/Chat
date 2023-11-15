@@ -41,6 +41,7 @@ class PasswordField extends CustomTextField {
                 validator: validator,
                 autovalidateMode: AutovalidateMode.onUserInteraction,
                 controller: controller,
+                textInputAction: textInputAction,
 
                 /// Decoration
                 decoration: InputDecoration(

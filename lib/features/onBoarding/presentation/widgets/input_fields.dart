@@ -65,6 +65,7 @@ class _InputFieldsState extends State<InputFields> {
           PhoneField(
             formKey: widget.formKey,
             phoneController: widget.phoneController,
+            nameController: widget.nameController,
           ),
 
           /// Social Media Link

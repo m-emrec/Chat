@@ -30,7 +30,7 @@ class _ButtonTextState extends State<ButtonText> {
       width:
           widget.size != null ? context.screenSize.width * widget.size! : null,
       child: InkWell(
-        splashColor: AppColors.button.withOpacity(0.5),
+        splashColor: AppColors.button.withOpacity(0.3),
         onTap: widget.onTap,
         child: Center(
           child: Text(

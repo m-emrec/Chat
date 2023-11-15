@@ -51,6 +51,9 @@ class _OnBoardingState extends State<OnBoarding> {
     return BlocConsumer<OnboardingBloc, OnboardingState>(
       bloc: _onboardingBloc,
       listener: (context, state) {
+        if (state is NumberVerifiedSuccessState) {
+          Navigator.of(context).pushReplacementNamed("/");
+        }
         if (state is NumberVerifiedFailState) {
           ScaffoldMessenger.of(context).showSnackBar(
             ErrorSnack(
@@ -74,7 +77,7 @@ class _OnBoardingState extends State<OnBoarding> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  /// Back Button
+                  //! SignOut Button
                   AnimatedCrossFade(
                     firstChild: ButtonText(
                       onTap: () {
@@ -84,6 +87,7 @@ class _OnBoardingState extends State<OnBoarding> {
                       size: 0.45,
                       height: 40,
                     ),
+                    //! Back Button
                     secondChild: ButtonText(
                       onTap: () => _pageController.previousPage(
                         duration: _duration,
@@ -98,18 +102,6 @@ class _OnBoardingState extends State<OnBoarding> {
                         : CrossFadeState.showSecond,
                     duration: const Duration(milliseconds: 500),
                   ),
-                  // Visibility(
-                  //   visible: !_isFirstPage,
-                  //   child: ButtonText(
-                  //     onTap: () => _pageController.previousPage(
-                  //       duration: _duration,
-                  //       curve: _curve,
-                  //     ),
-                  //     text: "Back",
-                  //     size: 0.45,
-                  //     height: 40,
-                  //   ),
-                  // ),
 
                   /// Continue Button
                   BlocConsumer<OnboardingBloc, OnboardingState>(
@@ -124,6 +116,7 @@ class _OnBoardingState extends State<OnBoarding> {
                             ? null
                             : () {
                                 if (_formKey.currentState!.validate()) {
+                                  logger.i(_nameController.text);
                                   _pageController.nextPage(
                                     duration: const Duration(milliseconds: 750),
                                     curve: _curve,

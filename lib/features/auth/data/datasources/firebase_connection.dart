@@ -8,14 +8,20 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class FirestoreConnection {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  // Future<DataState<UserModel>> fetchUserDataFromFireStore(String uid) async {
-  //   try {
+  Future<DataState> fetchUserDataFromFireStore(String uid) async {
+    try {
+      DocumentSnapshot _user =
+          await _firestore.collection("Users").doc(uid).get();
 
-  //   } catch (e) {
+      logger.i(_user.data());
 
-  //   }
-  // }
+      return DataSuccess(_user.data());
+    } catch (e) {
+      return DataFailed(e);
+    }
+  }
 
+  /// This function registers the data to Firestore database .
   Future<DataState> registerDataToFireStore(
       {required String uid, required String email}) async {
     final _user = UserModel(

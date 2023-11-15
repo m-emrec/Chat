@@ -19,5 +19,5 @@ abstract class UserRepo {
 
   Future<DataState> signInwithGoogle();
 
-  Future<DataState<UserEntity>> fetchUserData({required String uid});
+  Future<DataState> fetchUserData({required String uid});
 }

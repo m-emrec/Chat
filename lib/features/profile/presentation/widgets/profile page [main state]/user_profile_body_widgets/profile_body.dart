@@ -1,9 +1,14 @@
 import 'package:chat_app/core/extensions/context_extension.dart';
 import 'package:chat_app/core/extensions/empty_padding.dart';
 import 'package:chat_app/core/utils/Buttons/text_button.dart';
+import 'package:chat_app/features/auth/data/models/user_model.dart';
 import 'package:chat_app/features/profile/presentation/widgets/profile%20page%20%5Bmain%20state%5D/user_profile_body_widgets/status_widget.dart';
+import 'package:chat_app/injection_container.dart';
 import 'package:chat_app/logger.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../bloc/profile_bloc.dart';
 
 class ProfileBody extends StatefulWidget {
   const ProfileBody({super.key});
@@ -18,77 +23,70 @@ class _ProfileBodyState extends State<ProfileBody> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: SizedBox(
-        width: context.screenSize.width,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 32),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              ///! Status
-              StatusWidget(
-                controller: _statusController,
-              ),
-              16.ph,
-              //! email
-              Column(
+      child: BlocBuilder<ProfileBloc, ProfileState>(
+        bloc: sl<ProfileBloc>(),
+        builder: (context, state) {
+          state as ProfileLoadedSuccessState;
+          final data = state.data;
+
+          return SizedBox(
+            width: context.screenSize.width,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    "Email",
-                    style: context.textHeme.labelLarge,
+                  ///! Status
+                  StatusWidget(
+                    controller: _statusController..text = data.status ?? "",
                   ),
-                  const Padding(
-                    padding: EdgeInsets.only(left: 8.0, top: 16.0),
-                    child: SelectableText("m.emrec45@gmail.com"),
+                  16.ph,
+                  //! email
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Email",
+                        style: context.textHeme.labelLarge,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 8.0, top: 16.0),
+                        child: SelectableText(data.email ?? ""),
+                      ),
+                    ],
                   ),
+
+                  //! Change password buttton [TextButton]
+                  // ButtonText(
+                  //   onTap: () {},
+                  //   text: "Change Password",
+                  //   size: 0.4,
+                  // ),
+
+                  16.ph,
+
+                  //!  phone
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Phone",
+                        style: context.textHeme.labelLarge,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 8.0, top: 16.0),
+                        child: Text(
+                          data.phoneNumber ?? "",
+                        ),
+                      ),
+                    ],
+                  ),
+                  16.ph,
                 ],
               ),
-
-              //! Change password buttton [TextButton]
-              // ButtonText(
-              //   onTap: () {},
-              //   text: "Change Password",
-              //   size: 0.4,
-              // ),
-
-              16.ph,
-
-              //!  phone
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Phone",
-                    style: context.textHeme.labelLarge,
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.only(left: 8.0, top: 16.0),
-                    child: Text(
-                      "5550286812",
-                    ),
-                  ),
-                ],
-              ),
-              16.ph,
-
-              //! birthday
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Birthday",
-                    style: context.textHeme.labelLarge,
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.only(left: 8.0, top: 16.0),
-                    child: Text("29.06.1999"),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
+            ),
+          );
+        },
       ),
     );
   }

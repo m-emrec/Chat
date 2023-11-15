@@ -4,12 +4,12 @@ import 'package:chat_app/features/auth/domain/repositories/user_repo.dart';
 
 import '../entities/user_entity.dart';
 
-class FetchUserDataUseCase implements UseCase<DataState<UserEntity>, String> {
+class FetchUserDataUseCase implements UseCase<DataState<void>, String> {
   final UserRepo _userRepo;
 
   FetchUserDataUseCase(this._userRepo);
   @override
-  Future<DataState<UserEntity>> call(String uid) {
-    return _userRepo.fetchUserData(uid: uid);
+  Future<DataState> call(String uid) async {
+    return await _userRepo.fetchUserData(uid: uid);
   }
 }

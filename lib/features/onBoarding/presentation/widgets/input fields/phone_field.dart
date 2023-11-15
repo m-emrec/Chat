@@ -15,10 +15,12 @@ import '../animated_title.dart';
 class PhoneField extends StatefulWidget {
   final GlobalKey<FormState> formKey;
   final TextEditingController phoneController;
+  final TextEditingController nameController;
   const PhoneField({
     super.key,
     required this.formKey,
     required this.phoneController,
+    required this.nameController,
   });
 
   @override
@@ -77,8 +79,10 @@ class _PhoneFieldState extends State<PhoneField> {
                           if (widget.formKey.currentState!.validate()) {
                             _phoneNumber = _countryCodeController.text +
                                 widget.phoneController.text;
-                            _onboardingBloc.add(
-                                SendVerificationEvent(_phoneNumber, context));
+                            _onboardingBloc.add(SendVerificationEvent(
+                                widget.nameController.text,
+                                _phoneNumber,
+                                context));
                             //   ///
                           }
                         },

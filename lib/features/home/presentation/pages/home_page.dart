@@ -22,7 +22,8 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     /// TODO : Change this
-    _homeBloc.add(HomeProfileViewEvent());
+
+    _homeBloc.add(HomeInitialEvent());
     super.initState();
   }
 

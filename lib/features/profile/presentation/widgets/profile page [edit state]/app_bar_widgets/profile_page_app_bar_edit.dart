@@ -2,23 +2,54 @@ import 'dart:ui';
 
 import 'package:chat_app/core/extensions/context_extension.dart';
 import 'package:chat_app/features/profile/presentation/widgets/profile%20page%20%5Bedit%20state%5D/app_bar_widgets/apbar_title_row_edit.dart';
+import 'package:chat_app/injection_container.dart';
+import 'package:chat_app/logger.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../../config/theme/theme.dart';
+import '../../../../../auth/data/models/user_model.dart';
+import '../../../bloc/profile_bloc.dart';
 import 'profile_options_button_edit.dart';
 
 class ProfilePageAppBarEdit extends StatefulWidget {
-  const ProfilePageAppBarEdit({super.key});
+  final Size size;
+  const ProfilePageAppBarEdit({
+    super.key,
+    required this.size,
+  });
 
   @override
   State<ProfilePageAppBarEdit> createState() => _ProfilePageAppEditBarState();
 }
 
 class _ProfilePageAppEditBarState extends State<ProfilePageAppBarEdit> {
+  //! late variables
+  late ProfileBloc _profileBloc;
+  late ProfileUpdateState state;
+  late UserModel data;
+  late double _height;
+  late Size size;
+
+  @override
+  void initState() {
+    size = widget.size;
+
+    _height = size.height * 0.45;
+    _profileBloc = sl<ProfileBloc>();
+
+    // ! get userData from the state
+    state = _profileBloc.state as ProfileUpdateState;
+
+    data = state.data;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: context.screenSize.height * 0.45,
+      height: _height,
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(32),
@@ -28,54 +59,44 @@ class _ProfilePageAppEditBarState extends State<ProfilePageAppBarEdit> {
       child: Stack(
         children: [
           //* Image Container
-          FutureBuilder(
-            future: Future.delayed(
-                Duration(seconds: 0),
-                () =>
-                    " https://yandex.com/images/search?source=morda&text=macro+photography+of+nature&pos=1&rpt=simage&img_url=https%3A%2F%2Fwallbox.ru%2Fwallpapers%2Fmain2%2F201910%2Fkapli-list-korovka-boza.jpg&utm_campaign=morda&nl=1&lr=115702&utm_source=yandex" //FirebaseAuth.instance.currentUser!.photoURL ?? "",
-                ),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.done) {
-                return Container(
-                  decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.only(
-                      bottomLeft: Radius.circular(32),
-                      bottomRight: Radius.circular(32),
-                    ),
-                    // * Shadow
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.25),
-                        blurRadius: 16,
-                        offset: const Offset(0, 5),
-                        spreadRadius: 8,
-                      ),
-                    ],
-                    // * Profile Image
-                    image: const DecorationImage(
+
+          Container(
+            decoration: BoxDecoration(
+              // * Profile Image
+              // ! if [photoUrl] is null , backgroundImage will be null
+              //! and first letter of the user's name will be
+              //! used instedad of profile picture..
+              image: data.photoUrl == null
+                  ? null
+                  : DecorationImage(
                       fit: BoxFit.cover,
-                      filterQuality: FilterQuality.high,
-                      // TODO: Change It with user photoUrl
-                      image: NetworkImage(
-                          "https://i.pinimg.com/originals/91/6b/19/916b19d55e698b335c9eaf03d7eb511a.jpg" // FirebaseAuth.instance.currentUser!.photoURL ?? "",
-                          ),
+                      image: NetworkImage(data.photoUrl ?? ""),
                     ),
-                  ),
-                );
-              } else {
-                /// If profile pic is loading show [CircularProgressIndicator]
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              }
-            },
+            ),
+
+            // ! if [photoUrl] is null then use first letter of user name.
+            child: data.photoUrl == null
+                ? Center(
+                    child: CircleAvatar(
+                      backgroundColor: AppColors.scaffold,
+                      radius: size.width / 7,
+                      child: Text(
+                        data.name![0],
+                        style: context.textHeme.titleLarge!
+                            .copyWith(fontSize: 128),
+                      ),
+                    ),
+                  )
+                : null,
           ),
 
           //* Options Button
           const ProfileOptionsButtonEdit(),
 
           // * Name and Social Media Accounts Row
-          const AppBarTitleEdit(),
+          AppBarTitleEdit(
+            screenSize: size,
+          ),
         ],
       ),
     );

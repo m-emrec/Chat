@@ -15,18 +15,21 @@ class WaitForNumberVerificationEvent extends OnboardingEvent {}
 class SendVerificationEvent extends OnboardingEvent {
   final BuildContext context;
   final String phoneNumber;
+  final String name;
 
-  const SendVerificationEvent(this.phoneNumber, this.context);
+  const SendVerificationEvent(this.name, this.phoneNumber, this.context);
 }
 
 class CheckVerificationCodeEvent extends OnboardingEvent {
   final String code;
   final String phone;
   final String id;
+  final String name;
 
   const CheckVerificationCodeEvent(
     this.code,
     this.phone,
     this.id,
+    this.name,
   );
 }

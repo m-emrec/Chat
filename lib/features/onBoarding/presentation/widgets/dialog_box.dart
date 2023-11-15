@@ -9,11 +9,13 @@ import 'package:chat_app/logger.dart';
 
 class DialogBox extends StatefulWidget {
   final String phone;
+  final String name;
   final String vericificationId;
   const DialogBox({
     Key? key,
     required this.phone,
     required this.vericificationId,
+    required this.name,
   }) : super(key: key);
 
   @override
@@ -92,12 +94,15 @@ class _DialogBoxState extends State<DialogBox> {
             String _code = "";
             for (var element in _textFieldList) {
               _code += element.controller!.text;
-              logger.i(_code);
             }
 
             _onboardingBloc.add(
               CheckVerificationCodeEvent(
-                  _code, widget.phone, widget.vericificationId),
+                _code,
+                widget.phone,
+                widget.vericificationId,
+                widget.name,
+              ),
             );
           },
           context: context,
